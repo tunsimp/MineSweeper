@@ -233,9 +233,11 @@ public class MineSweeper {
 
     void print() {
         System.out.print("alo");
-        System.out.print("alo 123");
     }
 
+    void calculate(int a, int b) {
+        System.out.println(a + b);
+    }
 
 }
 
