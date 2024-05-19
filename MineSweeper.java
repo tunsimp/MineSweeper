@@ -234,6 +234,10 @@ public class MineSweeper {
 
     }
 
+    void print() {
+        System.out.print("alo");
+    }
+
 
 }
 
