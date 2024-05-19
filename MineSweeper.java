@@ -30,7 +30,6 @@ public class MineSweeper {
         frame.add(textPanel, BorderLayout.NORTH);
 
     }
-    public void bruh(){
-        System.out.println("test");    }
+
 
 }
