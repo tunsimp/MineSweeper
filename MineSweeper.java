@@ -134,23 +134,23 @@ public class MineSweeper {
     void setMines() {
         mineList = new ArrayList<MineTile>();
 
-        mineList.add(board[2][2]);
-        mineList.add(board[2][3]);
-        mineList.add(board[3][6]);
-        mineList.add(board[4][4]);
-        mineList.add(board[4][5]);
+//        mineList.add(board[2][2]);
+//        mineList.add(board[2][3]);
+//        mineList.add(board[3][6]);
+//        mineList.add(board[4][4]);
+//        mineList.add(board[4][5]);
 
-//        int mineLeft = mineCount;
-//        while (mineLeft > 0) {
-//            int r = random.nextInt(numRows); //0-7
-//            int c = random.nextInt(numCols);
-//
-//            MineTile tile = board[r][c];
-//            if (!mineList.contains(tile)) {
-//                mineList.add(tile);
-//                mineLeft -= 1;
-//            }
-//        }
+        int mineLeft = mineCount;
+        while (mineLeft > 0) {
+            int r = random.nextInt(numRows); //0-7
+            int c = random.nextInt(numCols);
+
+            MineTile tile = board[r][c];
+            if (!mineList.contains(tile)) {
+                mineList.add(tile);
+                mineLeft -= 1;
+            }
+        }
     }
 
     //iterate through the arraylist containing all tiles with mine, then set mine
