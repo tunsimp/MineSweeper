@@ -230,14 +230,6 @@ public class MineSweeper {
             return 1;
         return 0;
 
-
-
     }
-
-    void print() {
-        System.out.print("alo");
-    }
-
-
 }
 
