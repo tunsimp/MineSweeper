@@ -28,6 +28,9 @@ public class MineSweeper {
         textPanel.setLayout(new BorderLayout());
         textPanel.add(textLabel);
         frame.add(textPanel, BorderLayout.NORTH);
+
     }
+    public void bruh(){
+        System.out.println("test");    }
 
 }
