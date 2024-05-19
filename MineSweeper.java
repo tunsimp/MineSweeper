@@ -229,13 +229,11 @@ public class MineSweeper {
         if (mineList.contains(board[r][c]))
             return 1;
         return 0;
-
-
-
     }
 
     void print() {
         System.out.print("alo");
+        System.out.print("alo 123");
     }
 
 
