@@ -62,6 +62,7 @@ public class MineSweeper {
 
         textPanel.setLayout(new BorderLayout());
         textPanel.add(textLabel);
+
         frame.add(textLabel, BorderLayout.NORTH);
 
 
@@ -228,6 +229,11 @@ public class MineSweeper {
         if (mineList.contains(board[r][c]))
             return 1;
         return 0;
+
+
+
     }
+
+
 }
 
