@@ -3,21 +3,11 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
-import javax.swing.border.Border;
+
 
 public class MineSweeper {
     //this class is created because we need to add more properties to the clickable JButtons on grid
     //such as the row and col number of it to know where the button is when clicking it
-    public class MineTile extends JButton {
-        int r;
-        int c;
-
-        public MineTile(int r, int c) {
-            //passes in row & col numbers and assigns them to the member variables
-            this.r = r;
-            this.c = c;
-        }
-    }
 
     int tileSize = 70;
     int numRows = 8;
@@ -78,15 +68,19 @@ public class MineSweeper {
 
                 //set false to let the tile unable to receive keyboard input
                 tile.setFocusable(false);
-                //?set tile margin compare to the numbers/emoji within it
+                //set tile margin compare to the numbers/emoji within it
                 tile.setMargin(new Insets(0, 0, 0, 0));
                 tile.setFont(new Font("Arial Unicode MS", Font.PLAIN, 45));
-//                tile.setText("1");
+                //tile.setText("1");
                 //listens to mouse click
                 tile.addMouseListener(new MouseAdapter() {
                     @Override
                     //runs when mouse is clicked
                     public void mousePressed(MouseEvent e) {
+
+                        if(gameOver){ //check if the game is over or not, if yes then stop the game
+                            return;
+                        }
                         //get the clicked tile by getting a mouse click event
                         MineTile tile = (MineTile) e.getSource();
 
@@ -158,6 +152,9 @@ public class MineSweeper {
         for (MineTile tile : mineList) {
             tile.setText("💣");
         }
+
+        gameOver=true;//this is trigger only if revealMines method is called
+        textLabel.setText("Game Over");//set the notification
     }
 
     void checkMine(int r, int c) {
