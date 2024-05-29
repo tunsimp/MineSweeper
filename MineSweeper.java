@@ -71,7 +71,7 @@ public class MineSweeper {
                 //set tile margin compare to the numbers/emoji within it
                 tile.setMargin(new Insets(0, 0, 0, 0));
                 tile.setFont(new Font("Arial Unicode MS", Font.PLAIN, 45));
-                //tile.setText("1");
+
                 //listens to mouse click
                 tile.addMouseListener(new MouseAdapter() {
                     @Override
@@ -89,6 +89,11 @@ public class MineSweeper {
                         if (e.getButton() == MouseEvent.BUTTON1) {
                             //check if the tile hasn't been opened
                             if (tile.getText() == "") {
+                                if(tilesClicked==0){ //check to prevent the player click the bomb at the first move
+                                    if(mineList.contains(tile)){ //if the first click is the bomb so set the new Mine
+                                        setMines();
+                                    }
+                                }
                                 //check if the tile has mine in
                                 if (mineList.contains(tile)) {
                                     revealMines();
@@ -120,19 +125,15 @@ public class MineSweeper {
             }
         }
 
-        frame.setVisible(true);
-
+    }
+    void play(){
         setMines();
+        frame.setVisible(true);
     }
 
     void setMines() {
         mineList = new ArrayList<MineTile>();
 
-//        mineList.add(board[2][2]);
-//        mineList.add(board[2][3]);
-//        mineList.add(board[3][6]);
-//        mineList.add(board[4][4]);
-//        mineList.add(board[4][5]);
 
         int mineLeft = mineCount;
         while (mineLeft > 0) {
@@ -153,14 +154,14 @@ public class MineSweeper {
             tile.setText("💣");
         }
 
-        gameOver=true;//this is trigger only if revealMines method is called
+        gameOver=true;//this is triggered only if revealMines method is called
         textLabel.setText("Game Over");//set the notification
     }
 
     void checkMine(int r, int c) {
         //base case 1: check if the tiles is in the boundary of the board
-        if (r < 0 || r >= numRows || c < 0 || c >= numCols)
-            return;
+        if (r < 0 || r >= numRows || c < 0 || c >= numCols){
+            return;}
 
         MineTile tile = board[r][c];
 
@@ -228,7 +229,6 @@ public class MineSweeper {
         return 0;
 
     }
-
 
 }
 
