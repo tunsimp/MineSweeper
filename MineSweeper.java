@@ -16,9 +16,8 @@ public class MineSweeper {
     int boardHeight = numRows * tileSize;
 
     JFrame frame = new JFrame("Minesweeper");
-    JLabel textLabel = new JLabel();
-    JPanel textPanel = new JPanel();
-    JPanel boardPanel = new JPanel();
+    TextPanel textPanel;
+    BoardPanel boardPanel;
 
     int mineCount = 10;
     //2d array to store each mine tile so that we know where each is
