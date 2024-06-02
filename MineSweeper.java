@@ -1,10 +1,11 @@
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.*;
 
-
-public class MineSweeper {
+public class MineSweeper extends JFrame {
     //this class is created because we need to add more properties to the clickable JButtons on grid
     //such as the row and col number of it to know where the button is when clicking it
 
@@ -17,9 +18,11 @@ public class MineSweeper {
     JFrame frame = new JFrame("Minesweeper");
     TextPanel textPanel;
     BoardPanel boardPanel;
+    JMenuBar menuBar;
+    SettingsPanel settingsPanel;
 
     int mineCount = 10;
-    //2d array to store each mine tile so that we know where each is
+    // 2d array to store each mine tile so that we know where each is
     MineTile[][] board = new MineTile[numRows][numCols];
     ArrayList<MineTile> mineList;
     Random random = new Random();
@@ -30,13 +33,13 @@ public class MineSweeper {
     MineSweeper() {
 //        frame.setVisible(true);
 
-        //sets size to declare the dimension of the frame, in order to call setLocationRelativeTo() method later
+        // Sets size to declare the dimension of the frame, in order to call setLocationRelativeTo() method later
         frame.setSize(boardWidth, boardHeight);
-        //centers a frame relative a component, in this case, it is centered on the screen
+        // Centers a frame relative a component, in this case, it is centered on the screen
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //BorderLayout lets the frame places up to five areas: top, bot, left, right, cent
+        // BorderLayout lets the frame places up to five areas: top, bot, left, right, cent
         frame.setLayout(new BorderLayout());
 
         // Initialize the textPanel
@@ -44,13 +47,52 @@ public class MineSweeper {
         textPanel.setTextLabel("Minesweeper: " + mineCount);
         frame.add(textPanel, BorderLayout.NORTH);
 
+        // Initialize the menuBar
+        menuBar = new JMenuBar();
+
+        // Create a panel with BorderLayout
+        JPanel menuPanel = new JPanel(new BorderLayout());
+        JMenu settingMenu = new JMenu("⚙️");
+
+        // Create a font with a larger size
+        Font menuFont = new Font("Times New Romans", Font.BOLD, 18); // Change the size as needed
+        settingMenu.setFont(menuFont);
+
+        // Create a menu item for "⚙️" to add action listener
+        JMenuItem settingsMenuItem = new JMenuItem("Settings");
+        settingsMenuItem.setFont(menuFont);
+        settingMenu.add(settingsMenuItem);
+
+        // Create a menu bar with BoxLayout
+        JMenuBar leftMenuBar = new JMenuBar();
+        leftMenuBar.setLayout(new BoxLayout(leftMenuBar, BoxLayout.X_AXIS));
+        leftMenuBar.add(Box.createHorizontalGlue());
+        leftMenuBar.add(settingMenu);
+        menuPanel.add(leftMenuBar, BorderLayout.EAST);
+
+        menuBar.add(menuPanel);
+        frame.setJMenuBar(menuBar);
+
         // Initialize the mineList
         mineList = new ArrayList<>();
 
-        // Initialize the BoardPanel
+        // Initialize the boardPanel
         boardPanel = new BoardPanel(this, numRows, numCols, board, mineList);
         frame.add(boardPanel, BorderLayout.CENTER);
 
+        // Create a new panel for settings
+        settingsPanel = new SettingsPanel();
+
+        // Add action listener to the settings menu item
+        settingsMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.remove(boardPanel);
+                frame.add(settingsPanel, BorderLayout.CENTER);
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
     }
 
     void play() {
