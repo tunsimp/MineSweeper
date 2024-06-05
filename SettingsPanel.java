@@ -1,8 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SettingsPanel extends JPanel {
-    public SettingsPanel() {
+    private MineSweeper game;
+    public SettingsPanel(MineSweeper game) {
+        this.game=game;
         // Set layout for the settings panel
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -11,7 +15,7 @@ public class SettingsPanel extends JPanel {
         // Create buttons for difficulty levels
         JButton easyButton = new JButton("Easy 8x8");
         JButton mediumButton = new JButton("Medium 12x12");
-        JButton hardButton = new JButton("Hard 16x16");
+        JButton hardButton = new JButton("Hard 15x15");
 
         // Set preferred size for buttons to make them larger
         Dimension buttonSize = new Dimension(200, 50);
@@ -42,8 +46,33 @@ public class SettingsPanel extends JPanel {
         this.add(hardButton, gbc);
 
         // Add action listeners for the buttons (optional, for handling button clicks)
-        easyButton.addActionListener(e -> System.out.println("Easy button clicked"));
-        mediumButton.addActionListener(e -> System.out.println("Medium button clicked"));
-        hardButton.addActionListener(e -> System.out.println("Hard button clicked"));
+        easyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BoardPanel mediumBoard = new BoardPanel(getGame(),8,8,10);
+                game.setBoardPanel(mediumBoard);
+                game.showBoardPanel();
+            }
+        });
+        mediumButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BoardPanel mediumBoard = new BoardPanel(getGame(),12,12,36);
+                game.setBoardPanel(mediumBoard);
+                game.showBoardPanel();
+            }
+        });
+        hardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                BoardPanel mediumBoard = new BoardPanel(getGame(),15,15,80);
+                game.setBoardPanel(mediumBoard);
+                game.showBoardPanel();
+            }
+        });
+    }
+
+    public MineSweeper getGame() {
+        return this.game;
     }
 }
