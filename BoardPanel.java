@@ -141,15 +141,6 @@ public class BoardPanel extends JPanel {
         }
     }
 
-    int countMine(int r, int c) {
-        if (r < 0 || r >= numRows || c < 0 || c >= numCols) {
-            return 0;
-        }
-        if (mineList.contains(board[r][c])) {
-            return 1;
-        }
-        return 0;
-    }
 
     void setMines(MineTile firstTile) {
         mineList.clear();
@@ -171,57 +162,6 @@ public class BoardPanel extends JPanel {
         return Math.abs(r1 - r2) <= 1 && Math.abs(c1 - c2) <= 1; //true if 2 tile are adjacent
     }
 
-    void revealMines() {
-        for (MineTile tile : mineList) {
-            tile.setText("💣");
-        }
-        gameOver = true;
-        game.setTextPanel("Game Over");
-    }
-
-    void checkMine(int r, int c) {
-        if (r < 0 || r >= numRows || c < 0 || c >= numCols) {
-            return;
-        }
-
-        MineTile tile = board[r][c];
-        if (!tile.isEnabled()) {
-            return;
-        }
-
-        tile.setEnabled(false);
-        tilesClicked += 1;
-
-        int minesFound = 0;
-        minesFound += countMine(r - 1, c - 1);
-        minesFound += countMine(r - 1, c);
-        minesFound += countMine(r - 1, c + 1);
-        minesFound += countMine(r, c - 1);
-        minesFound += countMine(r, c + 1);
-        minesFound += countMine(r + 1, c - 1);
-        minesFound += countMine(r + 1, c);
-        minesFound += countMine(r + 1, c + 1);
-
-        if (minesFound > 0) {
-            tile.setText(Integer.toString(minesFound));
-        } else {
-            tile.setText("");
-            checkMine(r - 1, c - 1);
-            checkMine(r - 1, c);
-            checkMine(r - 1, c + 1);
-            checkMine(r, c - 1);
-            checkMine(r, c + 1);
-            checkMine(r + 1, c - 1);
-            checkMine(r + 1, c);
-            checkMine(r + 1, c + 1);
-        }
-
-        if (tilesClicked == numRows * numCols - mineList.size()) {
-            gameOver = true;
-            game.setTextPanel(
-                    "Mines Cleared!");
-        }
-    }
 
     int countMine(int r, int c) {
         if (r < 0 || r >= numRows || c < 0 || c >= numCols) {
