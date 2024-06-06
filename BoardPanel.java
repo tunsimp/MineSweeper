@@ -49,9 +49,7 @@ public class BoardPanel extends JPanel {
                         MineTile tile = (MineTile) e.getSource();
 
                         if (e.getButton() == MouseEvent.BUTTON1) {
-
-
-                            if (tile.getText()=="") {
+                            if (tile.getText().equals("")) {
                                 if (tilesClicked == 0) {
                                         setMines(tile);
                                         checkMine(tile.r, tile.c);
@@ -73,6 +71,84 @@ public class BoardPanel extends JPanel {
                 add(tile);
             }
         }
+        setMines();
+    }
+
+    void setMines() {
+        mineList.clear();
+        int mineLeft = mineCount;
+        while (mineLeft > 0) {
+            int r = random.nextInt(numRows);
+            int c = random.nextInt(numCols);
+
+            MineTile tile = board[r][c];
+            if (!mineList.contains(tile)) {
+                mineList.add(tile);
+                mineLeft -= 1;
+            }
+        }
+    }
+
+    void revealMines() {
+        for (MineTile tile : mineList) {
+            tile.setText("💣");
+        }
+        gameOver = true;
+        game.setTextPanel("Game Over");
+    }
+
+    void checkMine(int r, int c) {
+        if (r < 0 || r >= numRows || c < 0 || c >= numCols) {
+            return;
+        }
+
+        MineTile tile = board[r][c];
+        if (!tile.isEnabled()) {
+            return;
+        }
+
+        tile.setEnabled(false);
+        tilesClicked += 1;
+
+        int minesFound = 0;
+        minesFound += countMine(r - 1, c - 1);
+        minesFound += countMine(r - 1, c);
+        minesFound += countMine(r - 1, c + 1);
+        minesFound += countMine(r, c - 1);
+        minesFound += countMine(r, c + 1);
+        minesFound += countMine(r + 1, c - 1);
+        minesFound += countMine(r + 1, c);
+        minesFound += countMine(r + 1, c + 1);
+
+        if (minesFound > 0) {
+            tile.setText(Integer.toString(minesFound));
+        } else {
+            tile.setText("");
+            checkMine(r - 1, c - 1);
+            checkMine(r - 1, c);
+            checkMine(r - 1, c + 1);
+            checkMine(r, c - 1);
+            checkMine(r, c + 1);
+            checkMine(r + 1, c - 1);
+            checkMine(r + 1, c);
+            checkMine(r + 1, c + 1);
+        }
+
+        if (tilesClicked == numRows * numCols - mineList.size()) {
+            gameOver = true;
+            game.setTextPanel(
+                    "Mines Cleared!");
+        }
+    }
+
+    int countMine(int r, int c) {
+        if (r < 0 || r >= numRows || c < 0 || c >= numCols) {
+            return 0;
+        }
+        if (mineList.contains(board[r][c])) {
+            return 1;
+        }
+        return 0;
     }
 
     void setMines(MineTile firstTile) {
