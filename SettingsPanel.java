@@ -13,7 +13,7 @@ public class SettingsPanel extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10); // padding
 
         // Create buttons for difficulty levels
-        JButton easyButton = new JButton("Easy 8x8");
+        JButton easyButton = new JButton("Easy 9x9");
         JButton mediumButton = new JButton("Medium 12x12");
         JButton hardButton = new JButton("Hard 15x15");
 
@@ -49,15 +49,15 @@ public class SettingsPanel extends JPanel {
         easyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BoardPanel mediumBoard = new BoardPanel(getGame(),8,8,10);
-                game.setBoardPanel(mediumBoard);
+                BoardPanel easyBoard = new BoardPanel(getGame(),8,8,10);
+                game.setBoardPanel(easyBoard);
                 game.showBoardPanel();
             }
         });
         mediumButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BoardPanel mediumBoard = new BoardPanel(getGame(),12,12,36);
+                BoardPanel mediumBoard = new BoardPanel(getGame(),12,12,20);
                 game.setBoardPanel(mediumBoard);
                 game.showBoardPanel();
             }
@@ -65,8 +65,8 @@ public class SettingsPanel extends JPanel {
         hardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BoardPanel mediumBoard = new BoardPanel(getGame(),15,15,80);
-                game.setBoardPanel(mediumBoard);
+                BoardPanel hardBoard = new BoardPanel(getGame(),16,16,40);
+                game.setBoardPanel(hardBoard);
                 game.showBoardPanel();
             }
         });

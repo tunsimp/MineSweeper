@@ -3,13 +3,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class SettingMenu extends JMenuBar {
+class SettingsMenu extends JMenuBar {
 
     MineSweeper game;
     JMenu settingMenu;
     JMenuItem settingsMenuItem;
 
-    SettingMenu(MineSweeper game) {
+    SettingsMenu(MineSweeper game) {
         this.game = game;
 
         // Create a panel with BorderLayout

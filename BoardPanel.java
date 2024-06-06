@@ -49,13 +49,13 @@ public class BoardPanel extends JPanel {
                         MineTile tile = (MineTile) e.getSource();
 
                         if (e.getButton() == MouseEvent.BUTTON1) {
-                            if (tile.getText().equals("")) {
+
+
+                            if (tile.getText()=="") {
                                 if (tilesClicked == 0) {
-                                    if (mineList.contains(tile)) {
-                                        setMines();
-                                    }
-                                }
-                                if (mineList.contains(tile)) {
+                                        setMines(tile);
+                                        checkMine(tile.r, tile.c);
+                                } else if (mineList.contains(tile)) {
                                     revealMines();
                                 } else {
                                     checkMine(tile.r, tile.c);
@@ -73,22 +73,26 @@ public class BoardPanel extends JPanel {
                 add(tile);
             }
         }
-        setMines();
     }
 
-    void setMines() {
+    void setMines(MineTile firstTile) {
         mineList.clear();
         int mineLeft = mineCount;
         while (mineLeft > 0) {
             int r = random.nextInt(numRows);
             int c = random.nextInt(numCols);
-
             MineTile tile = board[r][c];
-            if (!mineList.contains(tile)) {
+            if (!mineList.contains(tile) && tile != firstTile && !isAdjacent(firstTile, tile)) {
                 mineList.add(tile);
                 mineLeft -= 1;
             }
         }
+    }
+
+    boolean isAdjacent(MineTile tile1, MineTile tile2) {
+        int r1 = tile1.r, c1 = tile1.c;
+        int r2 = tile2.r, c2 = tile2.c;
+        return Math.abs(r1 - r2) <= 1 && Math.abs(c1 - c2) <= 1; //true if 2 tile are adjacent
     }
 
     void revealMines() {
