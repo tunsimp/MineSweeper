@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SettingsPanel extends JPanel {
-    private MineSweeper game;
-    public SettingsPanel(MineSweeper game) {
+    private final MineSweeperFrame game;
+
+    public SettingsPanel(MineSweeperFrame game) {
         this.game=game;
         // Set layout for the settings panel
         this.setLayout(new GridBagLayout());
@@ -49,30 +50,24 @@ public class SettingsPanel extends JPanel {
         easyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BoardPanel easyBoard = new BoardPanel(getGame(),8,8,10);
-                game.setBoardPanel(easyBoard);
-                game.showBoardPanel();
+                game.setBoardPanel(1);
             }
         });
         mediumButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BoardPanel mediumBoard = new BoardPanel(getGame(),12,12,20);
-                game.setBoardPanel(mediumBoard);
-                game.showBoardPanel();
+                game.setBoardPanel(2);
             }
         });
         hardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BoardPanel hardBoard = new BoardPanel(getGame(),16,16,40);
-                game.setBoardPanel(hardBoard);
-                game.showBoardPanel();
+                game.setBoardPanel(3);
             }
         });
     }
 
-    public MineSweeper getGame() {
+    public MineSweeperFrame getGame() {
         return this.game;
     }
 }

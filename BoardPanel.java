@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.swing.*;
 
 public class BoardPanel extends JPanel {
-    private MineSweeper game;
+    private MineSweeperFrame game;
     private final int numRows;
     private final int numCols;
     // 2d array to store each mine tile so that we know where each is
@@ -19,8 +19,8 @@ public class BoardPanel extends JPanel {
     private int tilesClicked = 0;
     private boolean gameOver = false;
 
-    public BoardPanel(MineSweeper mineSweeper, int numRows, int numCols,int mineCount) {
-        this.game = mineSweeper;
+    public BoardPanel(MineSweeperFrame mineSweeperFrame, int numRows, int numCols, int mineCount) {
+        this.game = mineSweeperFrame;
         this.numRows = numRows;
         this.numCols = numCols;
         this.board = new MineTile[numRows][numCols];
