@@ -6,18 +6,18 @@ import javax.swing.*;
 
 public class BoardPanel extends JPanel {
     private MineSweeper game;
-    private int numRows;
-    private int numCols;
+    private final int numRows;
+    private final int numCols;
     // 2d array to store each mine tile so that we know where each is
-    private MineTile[][] board;
-    private ArrayList<MineTile> mineList;
+    private final MineTile[][] board;
+    private final ArrayList<MineTile> mineList;
 
-    private int mineCount ;
+    private final int mineCount;
 
-    Random random = new Random();
+    private final Random random = new Random();
 
-    int tilesClicked = 0;
-    boolean gameOver = false;
+    private int tilesClicked = 0;
+    private boolean gameOver = false;
 
     public BoardPanel(MineSweeper mineSweeper, int numRows, int numCols,int mineCount) {
         this.game = mineSweeper;
@@ -36,10 +36,6 @@ public class BoardPanel extends JPanel {
                 MineTile tile = new MineTile(r, c);
                 board[r][c] = tile;
 
-                tile.setFocusable(false);
-                tile.setMargin(new Insets(0, 0, 0, 0));
-                tile.setFont(new Font("Arial Unicode MS", Font.PLAIN, 45));
-
                 tile.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -49,7 +45,7 @@ public class BoardPanel extends JPanel {
                         MineTile tile = (MineTile) e.getSource();
 
                         if (e.getButton() == MouseEvent.BUTTON1) {
-                            if (tile.getText().equals("")) {
+                            if (tile.getText().isEmpty()) {
                                 if (tilesClicked == 0) {
                                         setMines(tile);
                                         checkMine(tile.r, tile.c);
@@ -60,7 +56,7 @@ public class BoardPanel extends JPanel {
                                 }
                             }
                         } else if (e.getButton() == MouseEvent.BUTTON3) {
-                            if (tile.getText().equals("") && tile.isEnabled()) {
+                            if (tile.getText().isEmpty() && tile.isEnabled()) {
                                 tile.setText("🚩");
                             } else if (tile.getText().equals("🚩")) {
                                 tile.setText("");
@@ -71,10 +67,9 @@ public class BoardPanel extends JPanel {
                 add(tile);
             }
         }
-        setMines();
     }
 
-    void setMines() {
+    public void setMines() {
         mineList.clear();
         int mineLeft = mineCount;
         while (mineLeft > 0) {
@@ -89,7 +84,7 @@ public class BoardPanel extends JPanel {
         }
     }
 
-    void revealMines() {
+    public void revealMines() {
         for (MineTile tile : mineList) {
             tile.setText("💣");
         }
@@ -97,7 +92,7 @@ public class BoardPanel extends JPanel {
         game.setTextPanel("Game Over");
     }
 
-    void checkMine(int r, int c) {
+    public void checkMine(int r, int c) {
         if (r < 0 || r >= numRows || c < 0 || c >= numCols) {
             return;
         }
@@ -142,7 +137,7 @@ public class BoardPanel extends JPanel {
     }
 
 
-    void setMines(MineTile firstTile) {
+    public void setMines(MineTile firstTile) {
         mineList.clear();
         int mineLeft = mineCount;
         while (mineLeft > 0) {
@@ -156,14 +151,14 @@ public class BoardPanel extends JPanel {
         }
     }
 
-    boolean isAdjacent(MineTile tile1, MineTile tile2) {
+    public boolean isAdjacent(MineTile tile1, MineTile tile2) {
         int r1 = tile1.r, c1 = tile1.c;
         int r2 = tile2.r, c2 = tile2.c;
         return Math.abs(r1 - r2) <= 1 && Math.abs(c1 - c2) <= 1; //true if 2 tile are adjacent
     }
 
 
-    int countMine(int r, int c) {
+    public int countMine(int r, int c) {
         if (r < 0 || r >= numRows || c < 0 || c >= numCols) {
             return 0;
         }
@@ -171,5 +166,9 @@ public class BoardPanel extends JPanel {
             return 1;
         }
         return 0;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }
