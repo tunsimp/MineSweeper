@@ -5,11 +5,11 @@ import java.awt.event.ActionListener;
 
 class SettingsMenu extends JMenuBar {
 
-    MineSweeper game;
+    MineSweeperFrame game;
     JMenu settingMenu;
     JMenuItem settingsMenuItem;
 
-    SettingsMenu(MineSweeper game) {
+    SettingsMenu(MineSweeperFrame game) {
         this.game = game;
 
         // Create a panel with BorderLayout
