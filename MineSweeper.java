@@ -6,27 +6,27 @@ public class MineSweeper extends JFrame {
     int boardWidth = 1280;
     int boardHeight = 720;
 
-    JFrame frame = new JFrame("Minesweeper");
+//    JFrame frame = new JFrame("Minesweeper");
     private final TextPanel textPanel;
     private BoardPanel boardPanel;
     private final SettingsPanel settingsPanel;
 
 
     MineSweeper() {
-//        frame.setVisible(true);
+//        setVisible(true);
 
         // Sets size to declare the dimension of the frame, in order to call setLocationRelativeTo() method later
-        frame.setSize(boardWidth, boardHeight);
+//        setSize(boardWidth, boardHeight);
         // Centers a frame relative a component, in this case, it is centered on the screen
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocation(0,0);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // BorderLayout lets the frame places up to five areas: top, bot, left, right, cent
-        frame.setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
 
         // Initialize the textPanel
         textPanel = new TextPanel();
-        frame.add(textPanel, BorderLayout.NORTH);
+        add(textPanel, BorderLayout.NORTH);
 
         // Initialize the settingsMenu
 
@@ -34,31 +34,35 @@ public class MineSweeper extends JFrame {
 
         settingsPanel = new SettingsPanel(this);
         // Set the menu bar
-        frame.setJMenuBar(settingsMenu);
+        setJMenuBar(settingsMenu);
 
 
         // Initialize the boardPanel
-        boardPanel = new BoardPanel(this,8,8,10);
-        frame.add(boardPanel, BorderLayout.CENTER);
+        boardPanel = new BoardPanel(this,9,9,10);
+        add(boardPanel, BorderLayout.CENTER);
+
+        setTitle("MineSweeper");
+        pack();
 
     }
 
     void play() {
-        frame.setVisible(true);
+        setVisible(true);
     }
 
     public void showSettingsPanel() {
-        frame.remove(boardPanel);
-        frame.add(settingsPanel, BorderLayout.CENTER);
-        frame.revalidate();
-        frame.repaint();
+        remove(boardPanel);
+        add(settingsPanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
 
     public void showBoardPanel() {
-        frame.remove(settingsPanel);
-        frame.add(boardPanel, BorderLayout.CENTER);
-        frame.revalidate();
-        frame.repaint();
+        remove(settingsPanel);
+        add(boardPanel, BorderLayout.CENTER);
+        pack();
+        revalidate();
+        repaint();
     }
     public void setTextPanel(String text){
         this.textPanel.setTextLabel(text);

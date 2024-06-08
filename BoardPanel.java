@@ -36,10 +36,10 @@ public class BoardPanel extends JPanel {
                 MineTile tile = new MineTile(r, c);
                 board[r][c] = tile;
 
-                tile.setFocusable(false);
-                tile.setMargin(new Insets(0, 0, 0, 0));
-                tile.setFont(new Font("Arial Unicode MS", Font.PLAIN, 45));
-
+//                tile.setFocusable(false);
+//                tile.setMargin(new Insets(0, 0, 0, 0));
+//                tile.setFont(new Font("Arial Unicode MS", Font.PLAIN, 45));
+//                tile.setPreferredSize(new Dimension(20,20));
                 tile.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -71,23 +71,8 @@ public class BoardPanel extends JPanel {
                 add(tile);
             }
         }
-        setMines();
     }
 
-    void setMines() {
-        mineList.clear();
-        int mineLeft = mineCount;
-        while (mineLeft > 0) {
-            int r = random.nextInt(numRows);
-            int c = random.nextInt(numCols);
-
-            MineTile tile = board[r][c];
-            if (!mineList.contains(tile)) {
-                mineList.add(tile);
-                mineLeft -= 1;
-            }
-        }
-    }
 
     void revealMines() {
         for (MineTile tile : mineList) {
@@ -171,5 +156,9 @@ public class BoardPanel extends JPanel {
             return 1;
         }
         return 0;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }
