@@ -3,6 +3,8 @@ import java.awt.*;
 
 public class MineSweeper extends JFrame {
 
+    private static final MineSweeper mineSweeper = new MineSweeper();
+
     int boardWidth = 1280;
     int boardHeight = 720;
 
@@ -11,10 +13,8 @@ public class MineSweeper extends JFrame {
     private BoardPanel boardPanel;
     private final SettingsPanel settingsPanel;
 
-
-    MineSweeper() {
-//        frame.setVisible(true);
-
+    // Private constructor to prevent instantiation
+    private MineSweeper() {
         // Sets size to declare the dimension of the frame, in order to call setLocationRelativeTo() method later
         frame.setSize(boardWidth, boardHeight);
         // Centers a frame relative a component, in this case, it is centered on the screen
@@ -29,18 +29,20 @@ public class MineSweeper extends JFrame {
         frame.add(textPanel, BorderLayout.NORTH);
 
         // Initialize the settingsMenu
-
         SettingsMenu settingsMenu = new SettingsMenu(this);
 
         settingsPanel = new SettingsPanel(this);
         // Set the menu bar
         frame.setJMenuBar(settingsMenu);
 
-
         // Initialize the boardPanel
-        boardPanel = new BoardPanel(this,8,8,10);
+        boardPanel = new BoardPanel(this, 8, 8, 10);
         frame.add(boardPanel, BorderLayout.CENTER);
+    }
 
+    // Public method to provide access to the singleton instance
+    public static MineSweeper getInstance() {
+        return mineSweeper;
     }
 
     void play() {
@@ -60,7 +62,8 @@ public class MineSweeper extends JFrame {
         frame.revalidate();
         frame.repaint();
     }
-    public void setTextPanel(String text){
+
+    public void setTextPanel(String text) {
         this.textPanel.setTextLabel(text);
     }
 
