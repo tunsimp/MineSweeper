@@ -30,10 +30,9 @@ public class MineSweeperFrame extends JFrame {
 
         // Initialize the settingsMenu
         SettingsMenu settingsMenu = new SettingsMenu(this);
+        setJMenuBar(settingsMenu);
 
         settingsPanel = new SettingsPanel(this);
-        // Set the menu bar
-        setJMenuBar(settingsMenu);
 
         // Initialize the boardPanel
         setBoardPanel(1);

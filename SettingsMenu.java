@@ -6,33 +6,28 @@ import java.awt.event.ActionListener;
 class SettingsMenu extends JMenuBar {
 
     MineSweeperFrame game;
-    JMenu settingMenu;
+    JMenu settingsMenu;
     JMenuItem settingsMenuItem;
 
     SettingsMenu(MineSweeperFrame game) {
         this.game = game;
 
-        // Create a panel with BorderLayout
-        JPanel menuPanel = new JPanel(new BorderLayout());
-        settingMenu = new JMenu("⚙️");
+        // Set the layout of the menu bar
+        setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        settingsMenu = new JMenu("⚙️️");
 
         // Create a font with a larger size
-        Font menuFont = new Font("Times New Romans", Font.BOLD, 18); // Change the size as needed
-        settingMenu.setFont(menuFont);
+        Font menuFont = new Font("San Serif", Font.BOLD, 18); // Change the size as needed
+        settingsMenu.setFont(menuFont);
 
         // Create a menu item for "⚙️" to add action listener
-        settingsMenuItem = new JMenuItem("Settings");
+        settingsMenuItem = new JMenuItem("Difficulties");
         settingsMenuItem.setFont(menuFont);
-        settingMenu.add(settingsMenuItem);
+        settingsMenu.add(settingsMenuItem);
 
-        // Create a menu bar with BoxLayout
-        JMenuBar leftMenuBar = new JMenuBar();
-        leftMenuBar.setLayout(new BoxLayout(leftMenuBar, BoxLayout.X_AXIS));
-        leftMenuBar.add(Box.createHorizontalGlue());
-        leftMenuBar.add(settingMenu);
-        menuPanel.add(leftMenuBar, BorderLayout.EAST);
-
-        add(menuPanel);
+        // Add the settings menu to the menu bar
+        add(settingsMenu);
 
         // Add action listener to the settings menu item
         settingsMenuItem.addActionListener(new ActionListener() {
