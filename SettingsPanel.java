@@ -13,6 +13,7 @@ public class SettingsPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // padding
 
+
         // Create buttons for difficulty levels
         JButton easyButton = new JButton("Easy 9x9");
         JButton mediumButton = new JButton("Medium 12x12");
