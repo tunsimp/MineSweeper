@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameOverFrame extends JFrame {
+    private BoardPanel boardPanel;
 
-    public GameOverFrame() {
+    public GameOverFrame(BoardPanel boardPanel) {
+        this.boardPanel=boardPanel;
         setTitle("Game Over!");
 
         setSize(300, 200);
@@ -45,10 +47,13 @@ public class GameOverFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                BoardPanel.restartGame();
+                boardPanel.restartGame();
+
             }
         });
 
-        setVisible(true);
+    }
+    public void showGameOver(){
+        this.setVisible(true);
     }
 }
