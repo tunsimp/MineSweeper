@@ -8,9 +8,9 @@ public class MineSweeperFrame extends JFrame {
     int boardWidth = 1280;
     int boardHeight = 720;
     private final TextPanel textPanel;
-    private BoardPanel boardPanel;
     private final SettingsPanel settingsPanel;
     private final IBoardPanel IBoardPanel;
+    private JPanel currentPanel;
 
     // Private constructor to prevent instantiation
     private MineSweeperFrame() {
@@ -27,6 +27,7 @@ public class MineSweeperFrame extends JFrame {
         // Initialize the textPanel
         textPanel = new TextPanel();
         add(textPanel, BorderLayout.NORTH);
+
 
         // Initialize the settingsMenu
         SettingsMenu settingsMenu = new SettingsMenu(this);
@@ -50,8 +51,11 @@ public class MineSweeperFrame extends JFrame {
     }
 
     public void showSettingsPanel() {
-        remove(boardPanel);
-        add(settingsPanel, BorderLayout.CENTER);
+        if(currentPanel!=null){
+            remove(currentPanel);
+        }
+        setBoardPanel(settingsPanel);
+        add(this.currentPanel, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
@@ -59,19 +63,23 @@ public class MineSweeperFrame extends JFrame {
     public void setBoardPanel(int level) {
         BoardPanel board = null;
         board = IBoardPanel.createBoardPanel(level);
+        if(currentPanel!=null){
+            remove(currentPanel);
+        }
         setBoardPanel(board);
-        remove(settingsPanel);
-        add(boardPanel, BorderLayout.CENTER);
+        add(this.currentPanel, BorderLayout.CENTER);
         pack();
         revalidate();
         repaint();
     }
 
+
     public void setTextPanel(String text) {
         this.textPanel.setTextLabel(text);
     }
 
-    public void setBoardPanel(BoardPanel boardPanel) {
-        this.boardPanel = boardPanel;
+    public void setBoardPanel(JPanel boardPanel) {
+        this.currentPanel = boardPanel;
     }
+
 }

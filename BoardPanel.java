@@ -20,15 +20,19 @@ public class BoardPanel extends JPanel {
     private boolean gameOver = false;
     private static int undoCount = 0;
     private static final int MAX_UNDO_COUNT = 3;
+    private final int level;
+    private GameOverFrame gameOverFrame;
 
 
-    public BoardPanel(MineSweeperFrame mineSweeperFrame, int numRows, int numCols, int mineCount) {
-        this.game = mineSweeperFrame;
+    public BoardPanel(MineSweeperFrame mineSweeperFrame, int numRows, int numCols, int mineCount,int level) {
+        game = mineSweeperFrame;
         this.numRows = numRows;
         this.numCols = numCols;
         this.board = new MineTile[numRows][numCols];
         this.mineList = new ArrayList<>();
         this.mineCount=mineCount;
+        this.level =level;
+        this.gameOverFrame=new GameOverFrame(this);
 
         game.setTextPanel("MineSweeper");
         setLayout(new GridLayout(numRows, numCols));
@@ -93,18 +97,7 @@ public class BoardPanel extends JPanel {
         }
         gameOver = true;
         game.setTextPanel("Game Over");
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new GameOverFrame();
-            }
-        });
-    }
-
-    public static void restartGame() {
-        game.setBoardPanel(1);
-        game.setTextPanel("New Game");
-        undoCount = 0;
+        gameOverFrame.showGameOver();
     }
 
     public static void undoLastMove() {
@@ -156,8 +149,7 @@ public class BoardPanel extends JPanel {
 
         if (tilesClicked == numRows * numCols - mineList.size()) {
             gameOver = true;
-            game.setTextPanel(
-                    "Mines Cleared!");
+            game.setTextPanel("Mines Cleared!");
         }
     }
 
@@ -195,5 +187,12 @@ public class BoardPanel extends JPanel {
 
     public boolean isGameOver() {
         return gameOver;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+    public void restartGame(){
+        game.setBoardPanel(this.getLevel());
     }
 }
