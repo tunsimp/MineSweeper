@@ -14,8 +14,8 @@ public class GameOverFrame extends JFrame {
 
         // Center the frame on the screen
         setLocationRelativeTo(null);
-
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         setLayout(new BorderLayout());
 
@@ -39,7 +39,7 @@ public class GameOverFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                BoardPanel.undoLastMove();
+                boardPanel.undo();
             }
         });
 
@@ -48,7 +48,6 @@ public class GameOverFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 boardPanel.restartGame();
-
             }
         });
 
