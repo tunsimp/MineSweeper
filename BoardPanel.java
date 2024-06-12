@@ -18,13 +18,16 @@ public class BoardPanel extends JPanel {
 
     private int tilesClicked = 0;
     private boolean gameOver = false;
-    private static int undoCount = 0;
-    private static final int MAX_UNDO_COUNT = 3;
+
+
+
+    private int undoCount = 0;
     private final int level;
     private GameOverFrame gameOverFrame;
+    private CareTaker careTaker;
 
 
-    public BoardPanel(MineSweeperFrame mineSweeperFrame, int numRows, int numCols, int mineCount,int level) {
+    public BoardPanel(MineSweeperFrame mineSweeperFrame, int numRows, int numCols, int mineCount,int level,int undoMax) {
         game = mineSweeperFrame;
         this.numRows = numRows;
         this.numCols = numCols;
@@ -33,6 +36,8 @@ public class BoardPanel extends JPanel {
         this.mineCount=mineCount;
         this.level =level;
         this.gameOverFrame=new GameOverFrame(this);
+        this.careTaker=new CareTaker();
+        this.undoCount=undoMax;
 
         game.setTextPanel("MineSweeper");
         setLayout(new GridLayout(numRows, numCols));
@@ -49,6 +54,8 @@ public class BoardPanel extends JPanel {
                         if (gameOver) {
                             return;
                         }
+
+                        saveMove();
                         MineTile tile = (MineTile) e.getSource();
 
                         if (e.getButton() == MouseEvent.BUTTON1) {
@@ -92,23 +99,16 @@ public class BoardPanel extends JPanel {
     }
 
     public void revealMines() {
+        if(undoCount>0){
+            gameOverFrame.showGameOver();
+            return;
+        }
         for (MineTile tile : mineList) {
             tile.setText("💣");
         }
         gameOver = true;
         game.setTextPanel("Game Over");
-        gameOverFrame.showGameOver();
     }
-
-    public static void undoLastMove() {
-        if (undoCount < MAX_UNDO_COUNT) {
-            undoCount++;
-            // Implement your undo logic here
-            // For example, restore the game state to the state before the last move
-            game.setTextPanel("Undo: " + undoCount + "/" + MAX_UNDO_COUNT);
-        }
-    }
-
 
     public void checkMine(int r, int c) {
         if (r < 0 || r >= numRows || c < 0 || c >= numCols) {
@@ -174,7 +174,6 @@ public class BoardPanel extends JPanel {
         return Math.abs(r1 - r2) <= 1 && Math.abs(c1 - c2) <= 1; //true if 2 tile are adjacent
     }
 
-
     public int countMine(int r, int c) {
         if (r < 0 || r >= numRows || c < 0 || c >= numCols) {
             return 0;
@@ -194,5 +193,35 @@ public class BoardPanel extends JPanel {
     }
     public void restartGame(){
         game.setBoardPanel(this.getLevel());
+        game.setVisible(true);
+    }
+    public Memeto save(){
+        return new Memeto(this.board,this.tilesClicked,this.gameOver);
+    }
+    public void saveMove(){
+        careTaker.saveState(save());
+    }
+    public void undo(){
+        if(getUndoCount()>0){
+            Memeto previousState= careTaker.restoreState();
+            this.gameOver=previousState.isGameOverState();
+            this.tilesClicked=previousState.getTileClickedState();
+            MineTile[][] previousBoard= previousState.getBoardState();
+            for(int r=0;r<numRows;r++){
+                for(int c=0;c<numCols;c++){
+                    board[r][c].setEnabled(previousBoard[r][c].isEnabled());
+                    board[r][c].setText(previousBoard[r][c].getText());
+                }
+            }
+            undoCount--;
+            game.add(this);
+            game.validate();
+            game.repaint();
+        } else {
+            restartGame();}
+    }
+
+    public int getUndoCount() {
+        return undoCount;
     }
 }
