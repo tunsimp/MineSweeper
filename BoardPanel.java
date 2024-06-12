@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.swing.*;
 
 public class BoardPanel extends JPanel {
-    private MineSweeperFrame game;
+    private static MineSweeperFrame game;
     private final int numRows;
     private final int numCols;
     // 2d array to store each mine tile so that we know where each is
@@ -18,6 +18,9 @@ public class BoardPanel extends JPanel {
 
     private int tilesClicked = 0;
     private boolean gameOver = false;
+    private static int undoCount = 0;
+    private static final int MAX_UNDO_COUNT = 3;
+
 
     public BoardPanel(MineSweeperFrame mineSweeperFrame, int numRows, int numCols, int mineCount) {
         this.game = mineSweeperFrame;
@@ -90,7 +93,29 @@ public class BoardPanel extends JPanel {
         }
         gameOver = true;
         game.setTextPanel("Game Over");
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new GameOverFrame();
+            }
+        });
     }
+
+    public static void restartGame() {
+        game.setBoardPanel(1);
+        game.setTextPanel("New Game");
+        undoCount = 0;
+    }
+
+    public static void undoLastMove() {
+        if (undoCount < MAX_UNDO_COUNT) {
+            undoCount++;
+            // Implement your undo logic here
+            // For example, restore the game state to the state before the last move
+            game.setTextPanel("Undo: " + undoCount + "/" + MAX_UNDO_COUNT);
+        }
+    }
+
 
     public void checkMine(int r, int c) {
         if (r < 0 || r >= numRows || c < 0 || c >= numCols) {
