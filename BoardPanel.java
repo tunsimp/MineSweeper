@@ -18,9 +18,6 @@ public class BoardPanel extends JPanel {
 
     private int tilesClicked = 0;
     private boolean gameOver = false;
-
-
-
     private int undoCount = 0;
     private final int level;
     private GameOverFrame gameOverFrame;
@@ -38,6 +35,7 @@ public class BoardPanel extends JPanel {
         this.gameOverFrame=new GameOverFrame(this);
         this.careTaker=new CareTaker();
         this.undoCount=undoMax;
+
 
         game.setTextPanel("MineSweeper");
         setLayout(new GridLayout(numRows, numCols));
@@ -191,16 +189,20 @@ public class BoardPanel extends JPanel {
     public int getLevel() {
         return level;
     }
+  
     public void restartGame(){
         game.setBoardPanel(this.getLevel());
         game.setVisible(true);
     }
+  
     public Memeto save(){
         return new Memeto(this.board,this.tilesClicked,this.gameOver);
     }
+  
     public void saveMove(){
         careTaker.saveState(save());
     }
+  
     public void undo(){
         if(getUndoCount()>0){
             Memeto previousState= careTaker.restoreState();
