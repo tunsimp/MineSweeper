@@ -106,6 +106,7 @@ public class BoardPanel extends JPanel {
         }
         gameOver = true;
         game.setTextPanel("Game Over");
+        gameOverFrame.showGameOver();
     }
 
     public void checkMine(int r, int c) {
