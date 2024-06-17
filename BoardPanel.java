@@ -99,6 +99,7 @@ public class BoardPanel extends JPanel {
     public void revealMines() {
         if(undoCount>0){
             gameOverFrame.showGameOver();
+            setVisible(false);
             return;
         }
         for (MineTile tile : mineList) {
@@ -220,6 +221,7 @@ public class BoardPanel extends JPanel {
             game.add(this);
             game.validate();
             game.repaint();
+            setVisible(true);
         } else {
             restartGame();}
     }
