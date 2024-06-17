@@ -11,9 +11,9 @@ public class BoardPanelFactory implements IBoardPanel {
             case 1:
                 return new BoardPanel(this.mineSweeperFrame, 8, 8, 10,level,3);
             case 2:
-                return new BoardPanel(this.mineSweeperFrame, 12, 12, 20,level,2);
+                return new BoardPanel(this.mineSweeperFrame, 15, 15, 40,level,2);
             case 3:
-                return new BoardPanel(this.mineSweeperFrame, 16, 16, 40,level,1);
+                return new BoardPanel(this.mineSweeperFrame, 16, 30, 99,level,1);
             default:
                 throw new IllegalArgumentException("Invalid difficulty level: " + level);
         }
