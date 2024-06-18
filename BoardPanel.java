@@ -22,6 +22,7 @@ public class BoardPanel extends JPanel {
     private final int level;
     private GameOverFrame gameOverFrame;
     private CareTaker careTaker;
+    private JButton undoButton;
 
 
     public BoardPanel(MineSweeperFrame mineSweeperFrame, int numRows, int numCols, int mineCount,int level,int undoMax) {
@@ -38,9 +39,10 @@ public class BoardPanel extends JPanel {
 
 
         game.setTextPanel("MineSweeper");
-        setLayout(new GridLayout(numRows, numCols));
+        setLayout(new BorderLayout());
         setBackground(Color.pink);
 
+        JPanel gridPanel = new JPanel(new GridLayout(numRows, numCols));
         for (int r = 0; r < numRows; r++) {
             for (int c = 0; c < numCols; c++) {
                 MineTile tile = new MineTile(r, c);
@@ -76,9 +78,19 @@ public class BoardPanel extends JPanel {
                         }
                     }
                 });
-                add(tile);
+                gridPanel.add(tile);
             }
         }
+        add(gridPanel, BorderLayout.CENTER);
+//        // Initialize and add the undo button
+//        undoButton = new JButton("Undo");
+//        undoButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                undo2();
+//            }
+//        });
+//        add(undoButton, BorderLayout.SOUTH); // Add the button to the bottom of the panel
     }
 
     public void setMines() {
@@ -97,8 +109,8 @@ public class BoardPanel extends JPanel {
     }
 
     public void revealMines() {
+        gameOverFrame.showGameOver();
         if(undoCount>0){
-            gameOverFrame.showGameOver();
             setVisible(false);
             return;
         }
@@ -107,7 +119,6 @@ public class BoardPanel extends JPanel {
         }
         gameOver = true;
         game.setTextPanel("Game Over");
-        gameOverFrame.showGameOver();
     }
 
     public void checkMine(int r, int c) {
@@ -205,9 +216,22 @@ public class BoardPanel extends JPanel {
         careTaker.saveState(save());
     }
   
-    public void undo(){
+    public void undo1(){
         if(getUndoCount()>0){
+            undoCount--;
+            game.add(this);
+            game.validate();
+            game.repaint();
+            setVisible(true);
+        } else {
+            restartGame();}
+    }
+
+    public void undo2(){
             Memeto previousState= careTaker.restoreState();
+            if(previousState==null){
+                return;
+            }
             this.gameOver=previousState.isGameOverState();
             this.tilesClicked=previousState.getTileClickedState();
             MineTile[][] previousBoard= previousState.getBoardState();
@@ -217,13 +241,10 @@ public class BoardPanel extends JPanel {
                     board[r][c].setText(previousBoard[r][c].getText());
                 }
             }
-            undoCount--;
             game.add(this);
             game.validate();
             game.repaint();
             setVisible(true);
-        } else {
-            restartGame();}
     }
 
     public int getUndoCount() {

@@ -39,7 +39,7 @@ public class GameOverFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                boardPanel.undo();
+                boardPanel.undo1();
             }
         });
 
