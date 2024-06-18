@@ -15,9 +15,9 @@ public class SettingsPanel extends JPanel {
 
 
         // Create buttons for difficulty levels
-        JButton easyButton = new JButton("Easy 9x9");
-        JButton mediumButton = new JButton("Medium 12x12");
-        JButton hardButton = new JButton("Hard 15x15");
+        JButton easyButton = new JButton("Easy 8x8");
+        JButton mediumButton = new JButton("Medium 15x15");
+        JButton hardButton = new JButton("Hard 30x16");
 
         // Set preferred size for buttons to make them larger
         Dimension buttonSize = new Dimension(200, 50);
