@@ -21,7 +21,7 @@ git clone https://github.com/tunsimp/MineSweeper.git
 cd MineSweeper-main
 ```
 
-1.2: Download the ZIP file and unzip it:
+1.2: Download the ZIP file,unzip it, and then run this:
 ```sh
 cd MineSweeper-main
 ```
