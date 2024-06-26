@@ -118,6 +118,7 @@ public class BoardPanel extends JPanel {
             tile.setText("💣");
         }
         gameOver = true;
+        undoButton.setEnabled(false);
         game.setTextPanel("Game Over");
     }
 
