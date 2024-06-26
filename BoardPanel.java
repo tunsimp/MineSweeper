@@ -82,15 +82,15 @@ public class BoardPanel extends JPanel {
             }
         }
         add(gridPanel, BorderLayout.CENTER);
-//        // Initialize and add the undo button
-//        undoButton = new JButton("Undo");
-//        undoButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                undo2();
-//            }
-//        });
-//        add(undoButton, BorderLayout.SOUTH); // Add the button to the bottom of the panel
+        // Initialize and add the undo button
+        undoButton = new JButton("Undo");
+        undoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                undo2();
+            }
+        });
+        add(undoButton, BorderLayout.NORTH); // Add the button to the bottom of the panel
     }
 
     public void setMines() {

@@ -22,7 +22,7 @@ class SettingsMenu extends JMenuBar {
         settingsMenu.setFont(menuFont);
 
         // Create a menu item for "⚙️" to add action listener
-        settingsMenuItem = new JMenuItem("Difficulties");
+        settingsMenuItem = new JMenuItem("Difficulty Levels");
         settingsMenuItem.setFont(menuFont);
         settingsMenu.add(settingsMenuItem);
 
