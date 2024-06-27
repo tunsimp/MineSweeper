@@ -61,8 +61,8 @@ To run the Interactive Minesweeper Game on your local machine, follow these step
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/minesweeper-game.git
-   cd minesweeper-game
+   git clone https://github.com/tunsimp/MineSweeper.git
+   cd MineSweeper
    ```
 
 2. **Compile the Code**:
