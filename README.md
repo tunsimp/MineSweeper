@@ -1,109 +1,92 @@
-# Minesweeper Game
+# Interactive Minesweeper Game
 
-## Introduction
+Welcome to the Interactive Minesweeper Game! This project is developed as part of a Data Structures and Algorithms course, with a focus on implementing design patterns and interactive gameplay. The game is built using Java and Swing for the GUI.
 
-This project is a Java implementation of the classic Minesweeper game, featuring a graphical user interface (GUI) built using Java Swing. The game includes various difficulty levels, undo functionality, and a user-friendly interface.
+## Table of Contents
 
-## Features
+- [Overview](#overview)
+- [Gameplay and Rules](#gameplay-and-rules)
+- [Level Design](#level-design)
+- [Design Patterns](#design-patterns)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Conclusion](#conclusion)
 
-- **Multiple Difficulty Levels**: Choose between Easy, Medium, and Hard difficulty levels.
-- **Undo Functionality**: Undo your last moves to correct mistakes.
-- **Graphical User Interface**: Intuitive and interactive UI built with Java Swing.
-- **Settings Menu**: Easily switch between different difficulty levels through a settings menu.
+## Overview
+
+The Interactive Minesweeper Game is a classic puzzle game where players uncover tiles on a grid, avoiding mines and using numerical clues to identify the locations of the mines. The game includes features such as different difficulty levels, an undo functionality, and a user-friendly interface.
+
+## Gameplay and Rules
+
+### Objective
+The objective of the game is to uncover all tiles that do not contain mines. If a player clicks on a tile that contains a mine, the game is over.
+
+### Controls
+- **Left Click**: Uncover a tile.
+- **Right Click**: Flag or unflag a tile as a mine.
+
+### Game States
+- **Game Over**: The game ends when a mine is uncovered.
+- **Victory**: The game is won when all non-mine tiles are uncovered.
+
+### Special Features
+- **Undo**: Players can undo their last move up to a limited number of times based on the difficulty level.
+
+## Level Design
+
+The game features three difficulty levels:
+- **Easy**: 8x8 grid with 10 mines.
+- **Medium**: 15x15 grid with 40 mines.
+- **Hard**: 16x30 grid with 99 mines.
+
+Each level offers a different grid size and number of mines, increasing the challenge as the difficulty level increases.
+
+## Design Patterns
+
+The project employs several design patterns to enhance its structure and maintainability:
+
+### Singleton Pattern
+- **MineSweeperFrame**: Ensures that there is only one instance of the main game frame.
+
+### Memento Pattern
+- **Memeto**: Stores the state of the game to allow undo functionality.
+- **CareTaker**: Manages the stack of saved states.
+
+### Factory Pattern
+- **BoardPanelFactory**: Creates instances of `BoardPanel` based on the selected difficulty level.
 
 ## Installation
 
-### Clone the Repository or Download the ZIP file
+To run the Interactive Minesweeper Game on your local machine, follow these steps:
 
-1.1: Using Git:
-```sh
-git clone https://github.com/tunsimp/MineSweeper.git
-cd MineSweeper-main
-```
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/yourusername/minesweeper-game.git
+   cd minesweeper-game
+   ```
 
-1.2: Download the ZIP file,unzip it, and then run this:
-```sh
-cd MineSweeper-main
-```
+2. **Compile the Code**:
+   ```bash
+   javac -d bin src/**/*.java
+   ```
 
-### Compile the Code:
-```sh
-javac -d bin *.java
-```
+3. **Run the Game**:
+   ```bash
+   java -cp bin src.main.App
+   ```
 
-### Run the Game:
-```sh
-cd bin
-java App
-```
+## Usage
 
-## Class Overview
+Once the game is running, you can select the difficulty level from the settings menu and start playing by clicking on the tiles. Use the undo button if you make a mistake and want to revert your last move.
 
-### App
+## Conclusion
 
-The entry point for the application. It initializes and starts the Minesweeper game.
-```java
-public class App {
-    public static void main(String[] args) {
-        MineSweeperFrame mineSweeperFrame = MineSweeperFrame.getInstance();
-        mineSweeperFrame.play();
-    }
-}
-```
+This project demonstrates the application of design patterns in a fun and interactive way. The use of the Singleton, Memento, and Factory patterns enhances the maintainability and scalability of the code. Enjoy playing the Interactive Minesweeper Game!
 
-### MineSweeperFrame
+## Authors
 
-Manages the main game window and its components, including the game board, settings menu, and status display.
+- **Nguyen Quoc Tuan**
+- **Bui Nguyen Thao Van**
+- **Luong Quang Huy**
 
-### BoardPanel
-
-Handles the game logic, including mine placement, tile checking, and user interactions.
-
-### BoardPanelFactory
-
-Implements the Factory design pattern to create BoardPanel instances based on the selected difficulty level.
-
-### CareTaker and Memento
-
-Implement the Memento design pattern to manage game state saving and restoring, enabling undo functionality.
-
-### MineTile
-
-Represents each cell on the Minesweeper game board. Extends JButton to handle user interactions.
-
-### SettingsMenu
-
-Provides a settings menu to switch between different difficulty levels.
-
-### SettingsPanel
-
-Displays buttons for selecting the game's difficulty level and handles user interactions to set the difficulty.
-
-### TextPanel
-
-Displays text messages such as game status updates within the game window.
-
-## How to Play
-
-1. **Start the Game**:
-   - Run the application. The main game window will appear.
-
-2. **Select Difficulty**:
-   - Use the settings menu to choose between Easy, Medium, and Hard difficulty levels.
-
-3. **Play the Game**:
-   - Left-click to uncover a cell.
-   - Right-click to flag a suspected mine.
-   - The goal is to uncover all cells that do not contain mines without detonating any mines.
-
-4. **Undo Moves**:
-   - Use the undo button in the Game Over frame to revert the last move if you make a mistake.
-   - Another undo button is used to return to the last move you made.
-
-## Contributors
-
-- **Nguyen Quoc Tuan** – ITITIU22177
-- **Bui Nguyen Thao Van** – ITITIU22218
-- **Luong Quang Huy** – ITITIU22076
-
-Feel free to reach out for any questions or suggestions regarding this project. Enjoy playing Minesweeper!
+We hope you enjoy the game and appreciate the efforts put into developing it! If you have any questions or suggestions, please feel free to reach out.
