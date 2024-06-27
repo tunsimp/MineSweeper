@@ -49,8 +49,9 @@ The game includes two different undo buttons:
   - **Medium**: 2 undos.
   - **Hard**: 1 undo.
 - To use this feature, click the "Undo" button on the game over frame when it appears.
-
 If you run out of undos, you can either click undo or restart buttonfrom the game over frame to restart.
+
+![image](https://github.com/tunsimp/MineSweeper/assets/125936708/2c3b5f9d-660d-4764-9cc9-49da74e278ac)
 
 ## Level Design
 
