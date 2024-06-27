@@ -57,7 +57,7 @@ The project employs several design patterns to enhance its structure and maintai
 
 ## Usage
 
-Once the game is running, you can select the difficulty level from the settings menu and start playing by clicking on the tiles. Use the undo button if you make a mistake and want to revert your last move.
+Once the game is running,the default level is easy. You can select the difficulty level from the settings menu and start playing by clicking on the tiles. Use the undo button if you make a mistake and want to revert your last move.
 
 ## Conclusion
 
