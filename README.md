@@ -30,7 +30,12 @@ The objective of the game is to uncover all tiles that do not contain mines. If 
 
 ### Special Features
 - **Undo**: Players can undo their last move up to a limited number of times based on the difficulty level.
+The game includes an 2 different undo features that allows players to undo their last move. The number of undos available depends on the difficulty level:
+- **Easy**: 3 undos.
+- **Medium**: 2 undos.
+- **Hard**: 1 undo.
 
+To use the undo feature, click the "Undo" button on the top of the game window. If you run out of undos, you can click undo again or restart to renew the game.
 ## Level Design
 
 The game features three difficulty levels:
