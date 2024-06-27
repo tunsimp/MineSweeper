@@ -34,7 +34,7 @@ The game includes two different undo buttons:
 
 ### 1. Undo Button on the Game Board
 - This button is located at the top of the game board.
-- It allows the player to undo their last move.
+- It allows the player to undo their last move even they have not click the mine.
 - To use this feature, simply click the "Undo" button on the top of the game window.
 
 ### 2. Undo Button on the Game Over Frame
