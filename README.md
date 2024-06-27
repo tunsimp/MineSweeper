@@ -27,7 +27,7 @@ The objective of the game is to uncover all tiles that do not contain mines. If 
 ### Game States
 - **Game Over**: The game ends when a mine is uncovered.
 - **Victory**: The game is won when all non-mine tiles are uncovered.
-- 
+
 ## Undo Feature
 
 The game includes two different undo buttons:
