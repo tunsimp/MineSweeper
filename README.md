@@ -55,25 +55,6 @@ The project employs several design patterns to enhance its structure and maintai
 ### Factory Pattern
 - **BoardPanelFactory**: Creates instances of `BoardPanel` based on the selected difficulty level.
 
-## Installation
-
-To run the Interactive Minesweeper Game on your local machine, follow these steps:
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/tunsimp/MineSweeper.git
-   cd MineSweeper
-   ```
-
-2. **Compile the Code**:
-   ```bash
-   javac -d bin src/**/*.java
-   ```
-
-3. **Run the Game**:
-   ```bash
-   java -cp bin src.main.App
-   ```
 
 ## Usage
 
