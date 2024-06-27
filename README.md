@@ -36,6 +36,7 @@ The game includes two different undo buttons:
 - This button is located at the top of the game board.
 - It allows the player to undo their last move even they have not click the mine.
 - To use this feature, simply click the "Undo" button on the top of the game window.
+- Player can freely use this feature until the game is over.
 
 ### 2. Undo Button on the Game Over Frame
 - When a player clicks on a mine and the game is over, a game over frame is displayed.
