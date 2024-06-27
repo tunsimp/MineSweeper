@@ -27,15 +27,28 @@ The objective of the game is to uncover all tiles that do not contain mines. If 
 ### Game States
 - **Game Over**: The game ends when a mine is uncovered.
 - **Victory**: The game is won when all non-mine tiles are uncovered.
+- 
+## Undo Feature
 
-### Special Features
-The game includes an 2 different undo features that allows players to undo their last move. The number of undos available depends on the difficulty level:
-- **Undo**: Players can undo their last move up to a limited number of times based on the difficulty level.
-- **Easy**: 3 undos.
-- **Medium**: 2 undos.
-- **Hard**: 1 undo.
+The game includes two different undo buttons:
 
-To use the undo feature, click the "Undo" button on the top of the game window. If you run out of undos, you can click undo again or restart to renew the game.
+### 1. Undo Button on the Game Board
+- This button is located at the top of the game board.
+- It allows the player to undo their last move.
+- To use this feature, simply click the "Undo" button on the top of the game window.
+
+### 2. Undo Button on the Game Over Frame
+- When a player clicks on a mine and the game is over, a game over frame is displayed.
+- This frame includes an "Undo" button that allows the player to undo their last move and continue playing.
+- The same undo count limits apply as per the difficulty level.
+- The number of undos available depends on the difficulty level:
+  - **Easy**: 3 undos.
+  - **Medium**: 2 undos.
+  - **Hard**: 1 undo.
+- To use this feature, click the "Undo" button on the game over frame when it appears.
+
+If you run out of undos, you can either click undo or restart buttonfrom the game over frame to restart.
+
 ## Level Design
 
 The game features three difficulty levels:
