@@ -14,6 +14,7 @@ Welcome to the Interactive Minesweeper Game! This project is developed as part o
 ## Overview
 
 The Interactive Minesweeper Game is a classic puzzle game where players uncover tiles on a grid, avoiding mines and using numerical clues to identify the locations of the mines. The game includes features such as different difficulty levels, an undo functionality, and a user-friendly interface.
+![image](https://github.com/tunsimp/MineSweeper/assets/125936708/83ca4943-d258-418a-9ba8-7635a4585001)
 
 ## Gameplay and Rules
 
