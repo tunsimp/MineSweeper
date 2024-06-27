@@ -8,7 +8,6 @@ Welcome to the Interactive Minesweeper Game! This project is developed as part o
 - [Gameplay and Rules](#gameplay-and-rules)
 - [Level Design](#level-design)
 - [Design Patterns](#design-patterns)
-- [Installation](#installation)
 - [Usage](#usage)
 - [Conclusion](#conclusion)
 
